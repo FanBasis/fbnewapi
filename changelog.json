@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-10-01",
+    "title": "Sandbox moves to api-sandbox.commas.net",
+    "tag": "breaking",
+    "desc": "The sandbox base URL is now <code class=\"inline\">https://api-sandbox.commas.net</code>, with its own dashboard at <a href=\"https://sandbox.commas.net\" target=\"_blank\" rel=\"noopener\">sandbox.commas.net</a>. Create sandbox keys there: a key only works on the host of the dashboard it was created in, and keys from the old QA environment (<code class=\"inline\">qa.dev-fan-basis.com</code>) no longer work. Production is unchanged at <code class=\"inline\">https://www.fanbasis.com</code>. The AI Agent and CLI now route sandbox calls to the new host. Invoicing is not in the sandbox yet. See <a href=\"#environments\">Environments</a>."
+  },
+  {
     "date": "September 2026",
     "title": "Invoicing — API, MCP &amp; CLI",
     "tag": "new",

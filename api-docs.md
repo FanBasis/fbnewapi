@@ -47,9 +47,9 @@ Keys created with the default settings carry **all** scopes, so most integration
 | Environment | Base URL |
 |-------------|----------|
 | Production  | `https://www.fanbasis.com` |
-| Sandbox     | `https://qa.dev-fan-basis.com` |
+| Sandbox     | `https://api-sandbox.commas.net` |
 
-Sandbox needs its own API key — always use your **sandbox (test) API key** against the sandbox base URL; production keys do not work there. If you use the Embedded Checkout SDK, its `environment` value for the test environment is the string `'sandbox'` (never `'qa'`), even though the host URL contains "qa".
+Sandbox has its own dashboard (https://sandbox.commas.net), accounts, and API keys. A key only works on the host of the dashboard it was created in: create sandbox keys in the sandbox dashboard under **Account → API Keys**; production keys do not work there, and keys from the old QA environment (`qa.dev-fan-basis.com`) do not work either. Invoicing endpoints are not in the sandbox yet (they return `404`). If you use the Embedded Checkout SDK, its `environment` value for test mode is the string `'sandbox'` (never `'qa'`).
 
 ### Test Card Numbers
 
@@ -1141,7 +1141,7 @@ curl -X POST "https://www.fanbasis.com/public-api/checkout-sessions/NLxj6/extend
 
 ### Subscription Proration
 
-> **Note:** These endpoints live on the Seller v1 API (`/api/seller/v1/`) but use the same `x-api-key` auth as the rest of the Public API. Production base URL: `https://www.fanbasis.com` — use the `www` host. The apex domain (`fanbasis.com`) issues a 301 redirect, which drops the body on `POST` requests. QA: `https://qa.dev-fan-basis.com`.
+> **Note:** These endpoints live on the Seller v1 API (`/api/seller/v1/`) but use the same `x-api-key` auth as the rest of the Public API. Production base URL: `https://www.fanbasis.com` — use the `www` host. The apex domain (`fanbasis.com`) issues a 301 redirect, which drops the body on `POST` requests. Sandbox: `https://api-sandbox.commas.net`.
 
 Tier-upgrade endpoints with automatic proration. Three calls drive the flow: list available upgrade targets, preview the math, then execute.
 
@@ -1829,7 +1829,7 @@ Also available with the same `x-api-key` authentication:
 
 ### Invoices
 
-Create and send invoices to clients. **Creating an invoice also emails it to the recipient automatically** with a hosted payment page — `POST /invoices` is the whole "send an invoice" flow. Requires the `invoices` key scope (keys with default/full scopes have it automatically; explicitly narrowed keys must add it). All monetary values are integer **cents** (`unitPrice: 15000` = $150.00) — note this differs from product creation, which takes dollars.
+Create and send invoices to clients. *Production only for now — not in the sandbox yet.* **Creating an invoice also emails it to the recipient automatically** with a hosted payment page — `POST /invoices` is the whole "send an invoice" flow. Requires the `invoices` key scope (keys with default/full scopes have it automatically; explicitly narrowed keys must add it). All monetary values are integer **cents** (`unitPrice: 15000` = $150.00) — note this differs from product creation, which takes dollars.
 
 Invoice statuses: `pending`, `paid`, `paid_off_platform`, `canceled`, `overdue`.
 
